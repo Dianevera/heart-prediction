@@ -11,7 +11,7 @@ from DecisionTree import DecisionTree
 #Load data
 data_path = "data/clean_data.csv"
 accuracies_file_path = "tests/tests_pkl/decision_tree/decisionTree_accuracies.pkl"
-actual_accuracies_file_path = "current_accuracies/decision_tree/decisionTree_accuracies.pkl"
+actual_accuracies_file_path = "src/current_accuracies/decision_tree/decisionTree_accuracies.pkl"
 data = np.loadtxt(data_path, delimiter=",",dtype=float, skiprows=1)
 col_names = np.genfromtxt(data_path , delimiter=',', names=True, dtype=float).dtype.names[1:31]
 

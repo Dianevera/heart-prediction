@@ -8,8 +8,8 @@ from sklearn.model_selection import train_test_split
 
 #Load data
 data_path = "data/clean_data.csv"
-accuracies_file_path  = "current_accuracies/logistic_regression/LogisticRegression_accuracies.pkl"
-actual_accuracies_file_path= "best_weights/LogisticRegression_accuracies.pkl"
+accuracies_file_path  = "src/current_accuracies/logistic_regression/LogisticRegression_accuracies.pkl"
+actual_accuracies_file_path= "src/best_weights/LogisticRegression_accuracies.pkl"
 
 data = np.loadtxt(data_path, delimiter=",",dtype=float, skiprows=1)
 col_names = np.genfromtxt(data_path , delimiter=',', names=True, dtype=float).dtype.names[1:31]

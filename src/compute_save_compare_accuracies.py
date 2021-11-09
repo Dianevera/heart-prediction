@@ -11,6 +11,7 @@ VALIDATION_SPLIT = 0.21
 TRAIN_SPLIT = 1 - TEST_SPLIT - VALIDATION_SPLIT
 
 SPLIT_PROPORTIONS = [TRAIN_SPLIT, VALIDATION_SPLIT, TEST_SPLIT]
+data_path = "../data/clean_data.csv"
 
 def compute_and_save_accuracies_logisticRegression(data_path, save_directory, accuracies_file_path, loss='BCElogits'):
     df = pd.read_csv(data_path)
@@ -35,7 +36,6 @@ def compute_and_save_accuracies_logisticRegression(data_path, save_directory, ac
 
 
 #Calculation of current recorded weights
-data_path = "data/clean_data.csv"
 save_directory = "best_weights/logistic_regression_weights"
 accuracies_file_path = "best_weights/LogisticRegression_accuracies.pkl"
 
@@ -43,13 +43,9 @@ compute_and_save_accuracies_logisticRegression(data_path, save_directory, accura
 
 
 #Calculation of current recorded weights
-data_path = "data/clean_data.csv"
 save_directory = "current_accuracies/logistic_regression/logistic_regression_weights"
 accuracies_file_path = "current_accuracies/logistic_regression/LogisticRegression_accuracies.pkl"
 
 compute_and_save_accuracies_logisticRegression(data_path, save_directory, accuracies_file_path)
 
 print("Compute accuracy based on weights finish")
-
-#Launch of the testsuite
-subprocess.run(["python", "-m", "pytest", "tests/Test_LogisticRegressionAccuracy.py"])
