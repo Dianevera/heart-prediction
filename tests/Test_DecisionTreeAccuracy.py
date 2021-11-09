@@ -6,7 +6,7 @@ import os
 
 from sklearn.model_selection import train_test_split
 
-from DecisionTree import DecisionTree
+from heartpredictions.DecisionTree import DecisionTree
 
 #Load data
 data_path = "data/clean_data.csv"
