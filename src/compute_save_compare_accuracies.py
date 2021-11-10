@@ -1,19 +1,18 @@
-import pickle
 import pandas as pd
-import subprocess
 import os
 from statistics import mean
 
 from sklearn.model_selection import train_test_split
 
-from LogisticRegression import *
-from DecisionTree import DecisionTree
+from heartpredictions.LogisticRegression import *
+from heartpredictions.DecisionTree import DecisionTree
 
 TEST_SPLIT = 0.2
 VALIDATION_SPLIT = 0.21
 TRAIN_SPLIT = 1 - TEST_SPLIT - VALIDATION_SPLIT
 
 SPLIT_PROPORTIONS = [TRAIN_SPLIT, VALIDATION_SPLIT, TEST_SPLIT]
+data_path = "data/clean_data.csv"
 
 
 def compute_and_save_accuracies_logisticRegression(data_path, save_directory, accuracies_file_path, loss='BCElogits'):
@@ -39,17 +38,15 @@ def compute_and_save_accuracies_logisticRegression(data_path, save_directory, ac
 
 
 #Calculation of current recorded weights
-data_path = "data/clean_data.csv"
-save_directory = "best_weights/logistic_regression_weights"
-accuracies_file_path = "best_weights/LogisticRegression_accuracies.pkl"
+save_directory = "src/best_weights/logistic_regression_weights"
+accuracies_file_path = "src/best_weights/LogisticRegression_accuracies.pkl"
 
 compute_and_save_accuracies_logisticRegression(data_path, save_directory, accuracies_file_path)
 
 
 #Calculation of current recorded weights
-data_path = "data/clean_data.csv"
-save_directory = "current_accuracies/logistic_regression/logistic_regression_weights"
-accuracies_file_path = "current_accuracies/logistic_regression/LogisticRegression_accuracies.pkl"
+save_directory = "src/current_accuracies/logistic_regression/logistic_regression_weights"
+accuracies_file_path = "src/current_accuracies/logistic_regression/LogisticRegression_accuracies.pkl"
 
 compute_and_save_accuracies_logisticRegression(data_path, save_directory, accuracies_file_path)
 
@@ -85,18 +82,16 @@ def compute_accuracies_with_saves(data_path, save_directory):
     return accuracies
 
 
-data_path = "data/clean_data.csv"
-save_directory = "current_accuracies/decision_tree/decision_tree_saves"
-accuracies_file_path = "current_accuracies/decision_tree/decisionTree_accuracies.pkl"
+save_directory = "src/current_accuracies/decision_tree/decision_tree_saves"
+accuracies_file_path = "src/current_accuracies/decision_tree/decisionTree_accuracies.pkl"
 
 accuracies = compute_accuracies_with_saves(data_path, save_directory)
 accuracies['mean'] = mean(accuracies.values())
 
 save_accuracies_pkl(accuracies_file_path, accuracies)
 
-data_path = "data/clean_data.csv"
-save_directory = "best_weights/decision_tree_saves"
-accuracies_file_path = "best_weights/decisionTree_accuracies.pkl"
+save_directory = "src/best_weights/decision_tree_saves"
+accuracies_file_path = "src/best_weights/decisionTree_accuracies.pkl"
 
 accuracies = compute_accuracies_with_saves(data_path, save_directory)
 accuracies['mean'] = mean(accuracies.values())
@@ -104,7 +99,3 @@ accuracies['mean'] = mean(accuracies.values())
 save_accuracies_pkl(accuracies_file_path, accuracies)
 
 print("Compute accuracy based on weights finish -- DecisionTree")
-
-subprocess.run(["python", "-m", "pytest", "tests/Test_LogisticRegressionAccuracy.py"])
-
-subprocess.run(["python", "-m", "pytest", "tests/Test_DecisionTreeAccuracy.py"])
