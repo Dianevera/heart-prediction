@@ -1,8 +1,5 @@
-import pytest
-
 import numpy as np
 import pickle
-import os
 
 from sklearn.model_selection import train_test_split
 

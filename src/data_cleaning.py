@@ -1,7 +1,5 @@
 import pandas as pd
 import os
-import math
-import numpy as np
 
 from sklearn.impute import KNNImputer
 

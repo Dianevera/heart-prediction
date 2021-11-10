@@ -1,6 +1,4 @@
-import pickle
 import pandas as pd
-import subprocess
 import os
 from statistics import mean
 
