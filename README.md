@@ -11,11 +11,15 @@ $ python -m pip install -e .
 
 # TestSuite usage
 * Command to run the testsuite on linux: 
-$ python -m pytest -v tests/Test*.py
+$ ./tests.sh
 * Tests will fail as long as the weights giving a higher accuracy are not put in the best_weights folder
 
 # Test integration
 * Thanks to the python application github's action we add a tests integrations before a pull request merge and at each commit push
 
 # About the heartpredictions module
+## Logistic regression
+The logistic regression from scratch with pytorch
+
+Normalization of each value between 0 and 1 based on the minimun and the maximum of each column.
 TODO

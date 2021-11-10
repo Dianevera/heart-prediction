@@ -15,11 +15,33 @@ from .HeartDiseaseDataset import HeartDiseaseDataset
 from .create_dataloaders import create_dataloaders
 
 def save_accuracies_pkl(pkl_filepath, accuracies):
+    """
+    Save accuracies with pickle in a file.
+
+    Parameters:
+        pkl_filepath (str) : Save filepath.
+        accuracies (dict) : Dictionary with label name as key and accuracy as value.
+    """
     accuracies_file = open(pkl_filepath, "wb")
     pickle.dump(accuracies, accuracies_file)
     accuracies_file.close()
 
 def prediction_analyse_labels(columns_names, trainers, all_labels, data_path, split_proportions, batch_size=1, display_confusion=True):
+    """
+    Prediction and analysis for each label.
+
+    Parameters:
+        columns_names (list) : List of labels to predict.
+        trainers (list(Trainer)) : List of trained model (Trainer objects).
+        all_labels (list) : List of all labels.
+        data_path (str) : The dataset filepath.
+        split_proportions (list) : A list of proportions (train, validation and test). The sum must be equal to 1.
+        batch_size (int) : The batch size for the train and validation dataloader.
+        display_confusion (boolean) : Display the analysis (confusion matrix + (sensitivity, specificity, PPV et NPV)).
+
+    Returns:
+        accuracies (dict)
+    """
     accuracies = {}
 
     for i, column in enumerate(all_labels):
@@ -38,6 +60,17 @@ def prediction_analyse_labels(columns_names, trainers, all_labels, data_path, sp
     return accuracies
 
 def prediction_analyse(dataloader, trainer, display_confusion=True):
+    """
+    Prediction and analysis for one model.
+
+    Parameters:
+        dataloader (Dataloader) : The Dataloader for the prediction.
+        trainer (Trainer) : The Trainer object containing the trained model.
+        display_confusion (boolean) : Display the analysis (confusion matrix + (sensitivity, specificity, PPV et NPV)).
+
+    Returns:
+        accuracy (float)
+    """
     accuracy = trainer.evaluate(dataloader, display=False)
     print("accuracy", accuracy)
 

@@ -10,8 +10,8 @@ class Node:
                  operator=None, value=None):
         """
         Attributes:
-            left (Node) : #TODO
-            right (Node) : #TODO
+            left (Node) : Left child node.
+            right (Node) : Right child node.
 
             information_gain (float) : The information gain with this decision.
             threshold (float) : The value to compare during the decision.

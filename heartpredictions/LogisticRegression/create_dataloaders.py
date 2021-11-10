@@ -1,6 +1,18 @@
 import torch
 
 def create_dataloaders(dataset, split_proportions, batch_size, display_informations=False):
+    """
+    Create three dataloaders (test, train, validation).
+
+    Parameters:
+        dataset (array) : The dataset array.
+        split_proportions (list) : Proportion of each dataloaders (sum must be equal to 1).
+        batch_size (int) : Batch size for the training and the validation dataloaders.
+        display_informations (boolean) : Dislay lengths of dataloaders if True.
+
+    Returns:
+        train_dataloader (DataLoader), val_dataloader (DataLoader), test_dataloader (DataLoader)
+    """
     lengths = [round(len(dataset) * split) for split in split_proportions]
 
     train_dataset, val_dataset, test_dataset = torch.utils.data.random_split(dataset, lengths=lengths, generator=torch.Generator().manual_seed(42))

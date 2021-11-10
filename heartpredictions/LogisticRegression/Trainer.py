@@ -5,8 +5,35 @@ import matplotlib.pyplot as plt
 from torch import nn
 import torch
 
+"""
+Trainer Class
+
+Class to train, store and evaluate a model.
+
+"""
+
 class Trainer:
     def __init__(self, model, class_weights, save_directory, loss='dl', lr=0.5, label_name = ""):
+        """
+        Parameters:
+            model (Module) : The model (torch.nn.Module).
+            class_weights (Tensor) : Weights of each class.
+            save_directory (str) : Save directory path.
+            loss (str) : String to match a loss function.
+            lr (float) : Learning rate.
+            label_name (str) : Name of the current label.
+
+        Atributes:
+            model (list(str)) : The model (torch.nn.Module).
+            criterion (torch) : The loss function.
+            optimizer (torch) : The optimizer.
+            scheduler (torch) : The reduce on lr plateau scheduler.
+            history (dict) : Dictionnary of history.
+            max_val_acc (float): Current maximal accuracy.
+            save_dir (str): Save directory path.
+            label_name (int): NAme of the current label.
+        """
+
 
         possible_loss = {'nllloss' : nn.NLLLoss(weight=class_weights, reduction='mean'),
                          'cross' : nn.CrossEntropyLoss(weight=class_weights), 'mse' : nn.MSELoss(reduction='mean'),
@@ -22,6 +49,15 @@ class Trainer:
         self.label_name = label_name
 
     def fit(self, train_dataloader, val_dataloader, nb_epochs):
+        """
+        Train the model.
+
+        Parameters:
+            train_dataloader (Dataloader) : The training dataloader.
+            val_dataloader (Dataloader) : The validation dataloader.
+            nb_epochs (int) : The number of epochs.
+        """
+
         print(f'==== Training {self.label_name} ====\n')
 
         for epoch in range(nb_epochs):
@@ -99,6 +135,17 @@ class Trainer:
                 torch.save(self.model.state_dict(), f'{self.save_dir}/logistic_regression_{self.label_name}.pt')
 
     def evaluate(self, test_dataloader, display=True):
+        """
+        Evaluate the model.
+
+        Parameters:
+            test_dataloader (Dataloader) : The test dataloader.
+            display (boolean) : If True, display information.
+
+        Returns:
+            total_accuracy (float)
+        """
+
         print(f'==== Evaluate {self.label_name} ====\n')
         correct = total_loss = total = 0.0
 
@@ -123,6 +170,14 @@ class Trainer:
             return total_accuracy
 
     def display_history(self, accuracy=True, loss=False):
+        """
+        Display the history loss or accuracy.
+
+        Parameters:
+            accuracy (boolean) : If True, plot the accuracy evolution.
+            loss (boolean) : If True, plot the loss evolution.
+        """
+
         if loss:
             plt.figure(figsize=(6,6))
             plt.plot(self.history['loss'], label="Loss")
@@ -142,5 +197,12 @@ class Trainer:
             plt.show()
 
     def load_weights(self, path):
+        """
+        Load weights from filepath.
+
+        Parameters:
+            path (str) : Weights path.
+        """
+
         self.model.load_state_dict(torch.load(path))
         self.model.eval()

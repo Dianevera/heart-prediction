@@ -21,10 +21,10 @@ class DecisionTree:
         """
         Atributes:
             x_col_names (list(str)) : List of input column names.
-            root = Node of the root of the tree.
+            root (Node) :  Node of the root of the tree.
 
-            min_participant (int): Minimum number of variables to compare individuals.
-            max_depth (int): Maximum depth of the tree.
+            min_participant (int) : Minimum number of variables to compare individuals.
+            max_depth (int) : Maximum depth of the tree.
         """
 
         self.x_col_names = None
@@ -218,9 +218,6 @@ class DecisionTree:
             X (array) : Inputs dataset.
             Y (array) : Labels dataset.
             x_col_names : List of column names of the inputs.
-
-        Returns:
-            None
         """
 
         dataset = np.concatenate((X, Y), axis=1)
@@ -236,7 +233,7 @@ class DecisionTree:
             decision_tree : Current subtree
 
         Returns:
-            evaluation (int)
+            Evaluation (int)
         """
 
         #leaf
@@ -258,7 +255,7 @@ class DecisionTree:
             X (array) : Array of individual.
 
         Returns:
-            evaluate (int)
+            Evaluate (int)
         """
 
         return [self.evaluate(x, self.root) for x in X]
@@ -322,9 +319,6 @@ class DecisionTree:
 
         Parameters:
             information_gain (bool) : If True display the information gain for each node.
-
-        Returns:
-            None
         """
 
         if self.root == None:
@@ -341,9 +335,6 @@ class DecisionTree:
             node (Node) : The current Node object to print.
             information_gain (bool) : If True display the information gain for each node.
             tiret (str) : String to print before each new depth
-
-        Returns:
-            #TODO
         """
 
         #leaf node
@@ -427,12 +418,19 @@ class DecisionTree:
         return accuracy
 
     def save_tree(self, path):
+        """
+        Save the DecisonTree object in the given filepath
+
+        Parameters:
+            path (str) : Save filepath.
+        """
+
         tree_info = []
         tree_info.append(self.x_col_names)
         tree_info.append(self.min_participant)
         tree_info.append(self.max_depth)
 
-        tree_info.append(self.__get_tree_str(self.root))
+        tree_info.append(self.__tree_to_list(self.root))
 
         tree_str = str(tree_info)
 
@@ -440,7 +438,17 @@ class DecisionTree:
         f.write(tree_str)
         f.close()
 
-    def __get_tree_str(self, node):
+    def __tree_to_list(self, node):
+        """
+        Iterate over the tree to construct a list representation.
+
+        Parameters:
+            node (Node) : The current node to convert into a list.
+
+        Returns:
+            tree (list)
+        """
+
         if node == None:
             return []
 
@@ -460,6 +468,13 @@ class DecisionTree:
         return node_info
 
     def import_tree(self, path):
+        """
+        Import the DecisonTree object from the given filepath.
+
+        Parameters:
+            path (str) : Save filepath.
+        """
+
         if not os.path.isfile(path):
             print("File doesn't exist :", path, file=sys.stderr)
             return
@@ -474,10 +489,20 @@ class DecisionTree:
 
         tree_list = tree_list[3]
 
-        self.root = self.__build_tree_from_file(tree_list)
+        self.root = self.__list_to_tree(tree_list)
 
 
-    def __build_tree_from_file(self, tree_list):
+    def __list_to_tree(self, tree_list):
+        """
+        Iterate over the list to reconstruct the tree representation.
+
+        Parameters:
+            tree_list (list) : Current tree list representation.
+
+        Returns:
+            tree (Node)
+        """
+
         if len(tree_list) == 0 :
             return None
 
