@@ -5,7 +5,8 @@ from statistics import mean
 from sklearn.model_selection import train_test_split
 
 from heartpredictions.LogisticRegression import *
-from heartpredictions.DecisionTree import DecisionTree
+from heartpredictions.Tree.DecisionTree import DecisionTree
+from heartpredictions.Tree.utils import prediction_analyse
 
 TEST_SPLIT = 0.2
 VALIDATION_SPLIT = 0.21
@@ -73,10 +74,10 @@ def compute_accuracies_with_saves(data_path, save_directory):
         Y = data[:, i:(i+1)]
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.4, random_state=42)
         decision_tree = DecisionTree()
-        decision_tree.import_tree(os.path.join(save_directory, files[file_index]))
+        decision_tree.load_from_file(os.path.join(save_directory, files[file_index]))
         #decision_tree.pretty_print()
 
-        accuracy = decision_tree.prediction_analyse(X_test, Y_test, False, False)
+        accuracy = prediction_analyse(decision_tree, X_test, Y_test, False, False)
         accuracies[column] = accuracy
 
     return accuracies

@@ -60,6 +60,19 @@ def prediction_analyse(model, X_test, Y_test, confusion_matrix_display=True, pro
 
 
 def fit_and_predict(data_path, save_directory, model_name = "Decision Tree", num_trees = 0, min_participant=2, max_depth=2, pretty_print=False):
+    """
+    Lunch fit and predict for a given model
+
+    Args:
+        data_path(string): Data path
+        save_directory(string): Directory where to save
+        model_name(string): Model name "Decision Tree" or "Random forest"
+        num_trees(int): Number of trees to buld in case of random forest
+        min_participant(int): Minimum number of variables to compare individuals
+        max_depth(int): Maximum depth
+        pretty_print(boolean): Flag for printtint or not 
+    """
+    # Split dataset into train, validation and test
     data = np.loadtxt(data_path, delimiter=",",dtype=float, skiprows=1)
     col_names = np.genfromtxt(data_path , delimiter=',', names=True, dtype=float).dtype.names[1:31]
     x_col_names = col_names[0:22]
@@ -67,6 +80,7 @@ def fit_and_predict(data_path, save_directory, model_name = "Decision Tree", num
 
     X = data[:, 1:23]
     Y = data[:, 29:30]
+    
     total_accuracy = 0
     models = []
     for i, column in enumerate(y_col_names):
