@@ -426,7 +426,7 @@ class DecisionTree:
 
         return accuracy
 
-    def save_tree(self, path):
+    def save_tree(self, path, random_forest_call = False):
         tree_info = []
         tree_info.append(self.x_col_names)
         tree_info.append(self.min_participant)
@@ -436,7 +436,14 @@ class DecisionTree:
 
         tree_str = str(tree_info)
 
-        f = open(path, "w")
+        if os.path.isfile(path) and not random_forest_call:
+            os.remove(path)
+            
+        f = open(path, "a+")
+
+        if random_forest_call:
+            f.write("\n")
+            
         f.write(tree_str)
         f.close()
 

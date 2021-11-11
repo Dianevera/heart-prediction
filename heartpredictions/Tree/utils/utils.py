@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import seaborn as sns
 
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
-from DecisionTree import DecisionTree
-from RandomForest import RandomForest
+from heartpredictions.Tree.DecisionTree import DecisionTree
+from heartpredictions.Tree.RandomForest import RandomForest
 
 def prediction_analyse(model, X_test, Y_test, confusion_matrix_display=True, proportion_informations=True):
     """
@@ -58,7 +59,7 @@ def prediction_analyse(model, X_test, Y_test, confusion_matrix_display=True, pro
     return accuracy
 
 
-def fit_and_predict(data_path, model_name = "Decision Tree", num_trees = 0, min_participant=2, max_depth=2):
+def fit_and_predict(data_path, save_directory, model_name = "Decision Tree", num_trees = 0, min_participant=2, max_depth=2, pretty_print=False):
     data = np.loadtxt(data_path, delimiter=",",dtype=float, skiprows=1)
     col_names = np.genfromtxt(data_path , delimiter=',', names=True, dtype=float).dtype.names[1:31]
     x_col_names = col_names[0:22]
@@ -76,11 +77,19 @@ def fit_and_predict(data_path, model_name = "Decision Tree", num_trees = 0, min_
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.4, random_state=42)
     
         print("\x1b[6;30;43m", "Random forest fit".center(30), "\x1b[0m")
+        
         if model_name == "Decision Tree":
             model = DecisionTree(min_participant=min_participant, max_depth=max_depth )
         else:
             model = RandomForest(num_trees=num_trees, min_participant=min_participant, max_depth=max_depth)
+
         model.fit(X_train, Y_train, x_col_names)
+
+        if pretty_print and model_name == "Decision Tree":
+            model.pretty_print()
+
+        file_name = '_'.join([model_name.lower().replace(" ", "_"), column])
+        model.save(os.path.join(save_directory, file_name))
         models.append(model)
         
         print("\n\x1b[6;30;43m", "Test".center(30),"\x1b[0m")
