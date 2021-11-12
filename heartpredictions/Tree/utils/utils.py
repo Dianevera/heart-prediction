@@ -59,7 +59,7 @@ def prediction_analyse(model, X_test, Y_test, confusion_matrix_display=True, pro
     return accuracy
 
 
-def fit_and_predict(data_path, save_directory, model_name = "Decision Tree", num_trees = 0, min_participant=2, max_depth=2, pretty_print=False):
+def evaluate(data_path, save_directory, model_name = "Decision Tree", num_trees = 0, min_participant=2, max_depth=2, pretty_print=False):
     """
     Lunch fit and predict for a given model
 
@@ -90,7 +90,7 @@ def fit_and_predict(data_path, save_directory, model_name = "Decision Tree", num
         
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.4, random_state=42)
     
-        print("\x1b[6;30;43m", "Random forest fit".center(30), "\x1b[0m")
+        print("\x1b[6;30;43m", f'{model_name} fit'.center(30), "\x1b[0m")
         
         if model_name == "Decision Tree":
             model = DecisionTree(min_participant=min_participant, max_depth=max_depth )

@@ -1,1 +1,1 @@
-from .utils import fit_and_predict, prediction_analyse
+from .utils import evaluate, prediction_analyse

@@ -80,11 +80,8 @@ if __name__ == "__main__":
         X = data[:, 1:23]
         Y = data[:, 29:30]
 
-        files = next(os.walk(save_directory), (None, None, []))[2]
-
         for i, column in enumerate(y_col_names):
             print(f'==== Evaluate {column} ====')
-            file_index = i
             i = i + 23
             Y = data[:, i:(i+1)]
             _, X_test, _, Y_test = train_test_split(X, Y, test_size=.4, random_state=42)
@@ -94,7 +91,8 @@ if __name__ == "__main__":
             else:
                 model = RandomForest()
 
-            model.load_from_file(os.path.join(save_directory, files[file_index]))
+            file_name = '_'.join([model_name.lower().replace(" ", "_"), column])
+            model.load_from_file(os.path.join(save_directory, file_name))
 
             accuracy = prediction_analyse(model, X_test, Y_test, False, False)
             accuracies[column] = accuracy
@@ -129,7 +127,6 @@ if __name__ == "__main__":
     accuracies_file_path = "src/current_accuracies/random_forest/randomForest_accuracies.pkl"
 
     print("############################## RANDOM FOREST ##############################")
-    print("first")
     accuracies = compute_accuracies_with_saves(data_path, save_directory, "Random Forest")
     accuracies['mean'] = mean(accuracies.values())
 
@@ -138,7 +135,6 @@ if __name__ == "__main__":
     save_directory = "src/best_weights/random_forest_saves"
     accuracies_file_path = "src/best_weights/randomForest_accuracies.pkl"
 
-    print("second")
     accuracies = compute_accuracies_with_saves(data_path, save_directory, "Random Forest")
     accuracies['mean'] = mean(accuracies.values())
 
