@@ -1,16 +1,11 @@
 import numpy as np
-import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 
-import torch
-from torch.utils.data import Dataset, DataLoader
 
-from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay, confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 
-from .LogisticRegression import LogisticRegression
 from .HeartDiseaseDataset import HeartDiseaseDataset
-from .Trainer import Trainer
 from .HeartDiseaseDataset import HeartDiseaseDataset
 from .create_dataloaders import create_dataloaders
 

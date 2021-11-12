@@ -99,7 +99,7 @@ class RandomForest():
         file.write(str([self.num_trees, self.min_participant, self.max_depth]))
         file.close()
         for tree in self.decision_trees:
-            tree.save_tree(path, random_forest_call = True)
+            tree.save(path, random_forest_call = True)
 
     def load_from_file(self, path):
         """
@@ -124,5 +124,5 @@ class RandomForest():
                 tree.min_participant = tree_list[1]
                 tree.max_depth = tree_list[2]
                 tree_list = tree_list[3]
-                tree.root = tree.__build_tree_from_file(tree_list)
+                tree.root = tree.build_tree_from_file(tree_list)
                 self.decision_trees.append(tree)

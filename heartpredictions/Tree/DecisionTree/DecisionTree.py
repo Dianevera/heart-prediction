@@ -427,17 +427,17 @@ class DecisionTree:
 
         tree_list = tree_list[3]
 
-        self.root = self.__build_tree_from_file(tree_list)
+        self.root = self.build_tree_from_file(tree_list)
 
 
-    def __build_tree_from_file(self, tree_list):
+    def build_tree_from_file(self, tree_list):
         if len(tree_list) == 0 :
             return None
 
         if len(tree_list) == 1:
             return Node(value=float(tree_list[0]))
 
-        return Node(self.__build_tree_from_file(tree_list[5]),
-                    self.__build_tree_from_file(tree_list[6]),
+        return Node(self.build_tree_from_file(tree_list[5]),
+                    self.build_tree_from_file(tree_list[6]),
                     float(tree_list[0]), float(tree_list[1]),
                     tree_list[2], int(tree_list[3]), tree_list[4])
