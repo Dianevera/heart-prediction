@@ -5,7 +5,7 @@ from tests.compare_accuracies import compare_accuracies
 
 #Load data
 data_path = "data/clean_data.csv"
-accuracies_file_path  = "src/current_accuracies/random_forest/RandomForest_accuracies.pkl"
+accuracies_file_path  = "src/current_accuracies/random_forest/randomForest_accuracies.pkl"
 actual_accuracies_file_path= "src/best_weights/randomForest_accuracies.pkl"
 
 data = np.loadtxt(data_path, delimiter=",",dtype=float, skiprows=1)
@@ -24,7 +24,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.4, random_s
 #Define the maximum depth
 DEPTH = 5
 
-class TestLogisticRegressionClass:
+class TestRandomForestClass:
 
     def test_compare_accuracies(self):
         no_upper, lower_accuracies = compare_accuracies(accuracies_file_path, actual_accuracies_file_path)
