@@ -2,7 +2,7 @@
 
 <!--You can use the [editor on GitHub](https://github.com/Dianevera/heart-prediction/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.-->
 
-```Table of Contents
+``` Table of Contents
 1. [Introduction](#Introduction)
 2. [Installation](#Installation)
 3. [Tests](#Tests)
@@ -44,8 +44,8 @@ The state of the art can be found in the file : "TODO".
 # Report of project
 The project report can be found in the file : "TODO"
 
-* ## Test integration
-* Thanks to the python application github's action we add a test integration action after each commit. 
+# Test integration
+Thanks to the python application github's action we add a test integration action after each commit. 
   All test in the testsuite must be pass to merge a branch.
   
 # About the data analysis
@@ -66,5 +66,5 @@ The project report can be found in the file : "TODO"
 * # MLP package
 #TODO
 
-# Example of workflow
+# Examples
 #TODO screen cast
