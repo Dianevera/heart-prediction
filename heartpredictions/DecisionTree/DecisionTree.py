@@ -427,6 +427,12 @@ class DecisionTree:
         return accuracy
 
     def save_tree(self, path):
+        """
+        Save the decision tree in the given file.
+
+        Parameters:
+            path (str) : Output file.
+        """
         tree_info = []
         tree_info.append(self.x_col_names)
         tree_info.append(self.min_participant)
@@ -441,6 +447,15 @@ class DecisionTree:
         f.close()
 
     def __get_tree_str(self, node):
+        """
+        Convert the decision tree in a string representation.
+
+        Parameters:
+            node (Node) : current tree node.
+
+        Return:
+            tree_str
+        """
         if node == None:
             return []
 
@@ -460,6 +475,12 @@ class DecisionTree:
         return node_info
 
     def import_tree(self, path):
+        """
+        Get the decision tree form the given file.
+
+        Parameters:
+            path (str) : Input file.
+        """
         if not os.path.isfile(path):
             print("File doesn't exist :", path, file=sys.stderr)
             return
@@ -478,6 +499,15 @@ class DecisionTree:
 
 
     def __build_tree_from_file(self, tree_list):
+        """
+        Convert the string representaion of the decision tree into an object Node.
+
+        Parameters:
+            tree_list (str) : current list of nodes.
+
+        Return:
+            tree (Node)
+        """
         if len(tree_list) == 0 :
             return None
 

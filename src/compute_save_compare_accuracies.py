@@ -16,6 +16,16 @@ data_path = "data/clean_data.csv"
 
 
 def compute_and_save_accuracies_logisticRegression(data_path, save_directory, accuracies_file_path, loss='BCElogits'):
+    """
+    Compute metrics and save them into a pkl file.
+
+    Parameters:
+        data_path (str) : path to the data.
+        save_directory (str) : Weights directory.
+        accuracies_file_path (str) : output pkl file.
+        loss (str) : loss to use.
+    """
+
     df = pd.read_csv(data_path)
     trainers = []
     all_labels_name = df.iloc[:, 23: 31].columns
@@ -52,8 +62,15 @@ compute_and_save_accuracies_logisticRegression(data_path, save_directory, accura
 
 print("Compute accuracy based on weights finish")
 
-#Launch of the testsuite
+
 def compute_accuracies_with_saves(data_path, save_directory):
+    """
+    Compute metrics and save them into a pkl file.
+
+    Parameters:
+        data_path (str) : path to the data.
+        save_directory (str) : Weights directory.
+    """
     accuracies = {}
     data = np.loadtxt(data_path, delimiter=",",dtype=float, skiprows=1)
     col_names = np.genfromtxt(data_path , delimiter=',', names=True, dtype=float).dtype.names[1:31]
