@@ -1,37 +1,70 @@
-## Welcome to GitHub Pages
+## Welcome to the Heart Predictions Project
 
-You can use the [editor on GitHub](https://github.com/Dianevera/heart-prediction/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<!--You can use the [editor on GitHub](https://github.com/Dianevera/heart-prediction/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.-->
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+```Table of Contents
+1. [Introduction](#Introduction)
+2. [Installation](#Installation)
+3. [Tests](#Tests)
+4. [State of the art](#State-of-the-art)
+5. [Report of project](#Report-of-project)
+6. [About the data analysis](#About-the-data-analysis)
+7. [About the data cleaning](#About-the-data-cleaning)
+8. [More about the heartpredictions module](#More-about-the-heartpredictions-module)
+9. [Example of workflow](#Example-of-workflow)
 
-### Markdown
+# Introduction
+Heart attack risk prediction
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+# Installation
+* ## Requirements installation
+To install requirements:
+```sh
+python -m pip install -r requirements.txt
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+* ## Installation of the created module heartpredictions
+To install all modules setup:
+```sh
+python -m pip install -e .
+```
 
-### Jekyll Themes
+# Tests
+* ## TestSuite usage 
+To run the testsuite on linux: 
+```sh
+python -m pytest -v tests/Test*.py
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Dianevera/heart-prediction/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Tests will fail as long as the weights giving a higher accuracy are not put in the best_weights folder
 
-### Support or Contact
+# State of the art
+The state of the art can be found in the file : "TODO".
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Report of project
+The project report can be found in the file : "TODO"
+
+* ## Test integration
+* Thanks to the python application github's action we add a test integration action after each commit. 
+  All test in the testsuite must be pass to merge a branch.
+  
+# About the data analysis
+#TODO 
+
+# About the data cleaning
+#TODO 
+
+
+# About the heartpredictions module
+
+* # DecisionTree package
+#TODO node decision tree
+
+* # LogisticRegression package
+#TODO Model trainer classweights dtaloader multiplelabelstrainer
+
+* # MLP package
+#TODO
+
+# Example of workflow
+#TODO screen cast
