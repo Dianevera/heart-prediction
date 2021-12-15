@@ -21,7 +21,6 @@ class HeartDiseaseDataset(Dataset):
         self.minMax = torch.from_numpy(compute_min_max(path, split_indexes[0], split_indexes[1]))
         self.len = len(self.data)
         self.class_weights = compute_class_weights(self.y)
-        print(self.class_weights)
 
     def __len__(self):
         return self.len
