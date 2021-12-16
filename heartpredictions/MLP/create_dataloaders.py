@@ -13,7 +13,7 @@ def create_dataloaders(dataset, split_proportions, batch_size, display_informati
     
     val_class = [1 - dataset.class_weights[torch.argmax(e[1])] for _,e in enumerate(val_dataset)]
     sampler_val = torch.utils.data.WeightedRandomSampler(val_class, len(val_class))
-
+    
     train_dataloader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=batch_size,

@@ -1,4 +1,4 @@
-from .HeartDiseaseDataset import HeartDiseaseDataset
+from ..Commun.HeartDiseaseDataset import HeartDiseaseDataset
 from .create_dataloaders import create_dataloaders
 from .MLP import MLP
 from .Trainer import Trainer

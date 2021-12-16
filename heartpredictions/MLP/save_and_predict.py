@@ -9,9 +9,8 @@ from torch.utils.data import Dataset, DataLoader
 from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay, confusion_matrix
 
 from .MLP import MLP
-from .HeartDiseaseDataset import HeartDiseaseDataset
+from ..Commun.HeartDiseaseDataset import HeartDiseaseDataset
 from .Trainer import Trainer
-from .HeartDiseaseDataset import HeartDiseaseDataset
 from .create_dataloaders import create_dataloaders
 
 def save_accuracies_pkl(pkl_filepath, accuracies):

@@ -1,4 +1,4 @@
-from .HeartDiseaseDataset import HeartDiseaseDataset
+from ..Commun.HeartDiseaseDataset import HeartDiseaseDataset
 from .create_dataloaders import create_dataloaders
 from .LogisticRegression import LogisticRegression
 from .Trainer import Trainer
