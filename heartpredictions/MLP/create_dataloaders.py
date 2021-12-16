@@ -1,6 +1,20 @@
 import torch
 
 def create_dataloaders(dataset, split_proportions, batch_size, display_informations=False):
+    """
+    Creates all the datloaders.
+
+            Parameters:
+                    dataset (Dataset): The datset we are going to split
+                    split_proportions([float]): List of all the proportions for each split
+                    batch_size (int): The batch size
+                    display_informations(bool): If True we display the size of each dataloader
+
+            Returns:
+                    train_dataloader (datloader): The train dataloader
+                    val_dataloader (datloader): The validation dataloader
+                    test_dataloader (datloader): The test dataloader
+    """
     lengths = [round(len(dataset) * split) for split in split_proportions]
     train_dataset, val_dataset, test_dataset = torch.utils.data.random_split(dataset, lengths=lengths, generator=torch.Generator().manual_seed(42))
         

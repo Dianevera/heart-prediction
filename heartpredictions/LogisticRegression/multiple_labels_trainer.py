@@ -4,6 +4,22 @@ from .LogisticRegression import LogisticRegression
 from .Trainer import Trainer
 
 def train_labels(columns_names, data_path, all_labels, split_proportions, save_directory, nb_epochs=3, batch_size=1, display_history=True):
+    """
+        Trains all the specified labels.
+
+                Parameters:
+                        columns_names ([string]): Column names that we are going to predict
+                        data_path (string): Path to the data
+                        all_labels ([string]): List of the order of the trainers
+                        split_proportions (string): List of all the proportions for each split
+                        save_directory (string): Where we save the weights
+                        nb_epochs (int): Number of epochs we will train each trainer for
+                        batch_size (int): The batch size
+                        display_history (bool): If True we print the history of the trainer
+
+                Returns:
+                        trainers ([Trainer]): All the trainers we just trained
+    """
     trainers = []
 
     for i, column in enumerate(all_labels):

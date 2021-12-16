@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 import torch
 from torch.utils.data import Dataset, DataLoader
@@ -19,6 +20,21 @@ def save_accuracies_pkl(pkl_filepath, accuracies):
     accuracies_file.close()
 
 def prediction_analyse_labels(columns_names, trainers, all_labels, data_path, split_proportions, batch_size=1, display_confusion=True):
+    """
+    Predicts all the labels told to with the trainers given.
+
+            Parameters:
+                    columns_names ([string]): Column names that we are going to predict
+                    trainers ([Trainers]): List of all the Trainer (one for each column)
+                    all_labels ([string]): list of the order of the trainers
+                    data_path (string): path to the data
+                    split_proportions([float]): list of all the proportions for each split
+                    batch_size (int): the batch size
+                    display_confusion(bool): If True we display the confusion matrixes
+
+            Returns:
+                    accuracies ([float]): List of accuracies of all categories
+    """
     accuracies = {}
 
     for i, column in enumerate(all_labels):
@@ -37,6 +53,16 @@ def prediction_analyse_labels(columns_names, trainers, all_labels, data_path, sp
     return accuracies
 
 def prediction_analyse(dataloader, trainer, display_confusion=True):
+    """
+    Predicts the data in the datalaoder.
+            Parameters:
+                    dataloader (Dataloader): Test dataloader
+                    trainer (Trainer): The trainer we will evaluate
+                    display_confusion(bool): If True we display the confusion matrix
+
+            Returns:
+                    accuracy (float): Accuracy of the predictions
+    """
     accuracy = trainer.evaluate(dataloader, display=False)
     print("accuracy", accuracy)
 
@@ -60,8 +86,12 @@ def prediction_analyse(dataloader, trainer, display_confusion=True):
 
 
     if display_confusion:
-        display = ConfusionMatrixDisplay(confusion_matrix=cm)
-        display.plot()
+        group_names = ['True Neg','False Pos','False Neg','True Pos']
+        group_counts = ["{0:0.0f}".format(value) for value in cm.flatten()]
+        group_percentages = ["{0:.2%}".format(value) for value in cm.flatten()/np.sum(cm)]
+        labels = [f"{v1}\n{v2}\n{v3}" for v1, v2, v3 in zip(group_names,group_counts,group_percentages)]
+        labels = np.asarray(labels).reshape(2,2)
+        sns.heatmap(cm, annot=labels, fmt='', cmap='Blues')
         plt.show()
 
     TP = cm[1,1] # true positive 

@@ -7,7 +7,16 @@ import torch
 
 class Trainer:
     def __init__(self, model, class_weights, save_directory, loss='dl', lr=0.5, label_name = ""):
+        """
+            Create the Trainer object.
 
+                    Parameters:
+                            model (Model): The model we are going to train
+                            class_weights ([float]): The class_weights
+                            save_directory (string): The path where we will save the weights
+                            loss (string): The name of the loss function (see below for me details)
+                            label_name (string): The label we are training on
+        """
         possible_loss = {'nllloss' : nn.NLLLoss(weight=class_weights, reduction='mean'),
                          'cross' : nn.CrossEntropyLoss(weight=class_weights), 'mse' : nn.MSELoss(reduction='mean'),
                          'BCEloss' : nn.BCELoss(), 'BCElogits' : nn.BCEWithLogitsLoss(weight=class_weights)}
@@ -22,10 +31,19 @@ class Trainer:
         self.label_name = label_name
 
     def fit(self, train_dataloader, val_dataloader, nb_epochs):
+        """
+            The fit function.
+
+                Parameters:
+                        train_dataloader (dataloader): The train data loader
+                        val_dataloader (dataloader): The validation data loader
+                        nb_epochs (int): Number of epochs we will train each trainer for
+
+                Returns:
+                        trainers ([Trainer]): All the trainers we just trained
+        """
         print(f'==== Training {self.label_name} ====\n')
 
-        #report = 0
-        #total = 0
         for epoch in range(nb_epochs):
             print(f'Epoch {epoch + 1} / {nb_epochs}')
             train_loss = val_loss = train_acc = val_acc = 0.0
@@ -36,9 +54,6 @@ class Trainer:
             for i, batch in enumerate(train_dataloader):
                 inputs, labels = batch
 
-                #if np.argmax(labels.detach().numpy()[0]) == 0:
-                #    report += 1
-                #total += 1
                 # Clear gradients w.r.t. parameters
                 self.optimizer.zero_grad()
 
@@ -63,7 +78,6 @@ class Trainer:
                 # Updating parameters
                 self.optimizer.step()
 
-            #print("balanced verification Label 0 :", report/total, 'label 1 : ', 1 - (report/total))
             print('Validation')
             self.model.eval()
             pbar = tf.keras.utils.Progbar(target=len(val_dataloader))
@@ -104,6 +118,16 @@ class Trainer:
                 torch.save(self.model.state_dict(), f'{self.save_dir}/MLP_{self.label_name}.pt')
 
     def evaluate(self, test_dataloader, display=True):
+        """
+            The evaluation function. Test our model.
+
+                Parameters:
+                        test_dataloader (dataloader): The test data loader
+                        display (Bool): If true we display the Iteration, Loss, Accuracy and total loss as we go along the evaluation
+
+                Returns:
+                        total_accuracy (float): The accuracy we got on the test datloader
+        """
         print(f'==== Evaluate {self.label_name} ====\n')
         correct = total_loss = total = 0.0
 
@@ -128,6 +152,13 @@ class Trainer:
             return total_accuracy
 
     def display_history(self, accuracy=True, loss=False):
+        """
+            Plot the evolution of the accuracy and loss.
+
+                Parameters:
+                        accuracy (bool): If True we plot the accuracy
+                        loss (Bool): If true we plot the loss
+        """
         if loss:
             plt.figure(figsize=(6,6))
             plt.plot(self.history['loss'], label="Loss")
@@ -147,5 +178,11 @@ class Trainer:
             plt.show()
 
     def load_weights(self, path):
+        """
+            load the weights.
+
+                Parameters:
+                        path (string): The weights path
+        """
         self.model.load_state_dict(torch.load(path))
         self.model.eval()
