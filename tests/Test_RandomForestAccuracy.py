@@ -5,8 +5,8 @@ from tests.compare_accuracies import compare_accuracies
 
 #Load data
 data_path = "data/clean_data.csv"
-actual_accuracies_file_path = "src/best_weights/decisionTree_accuracies.pkl"
-accuracies_file_path = "src/current_accuracies/decision_tree/decisionTree_accuracies.pkl"
+accuracies_file_path  = "src/current_accuracies/random_forest/randomForest_accuracies.pkl"
+actual_accuracies_file_path= "src/best_weights/randomForest_accuracies.pkl"
 
 data = np.loadtxt(data_path, delimiter=",",dtype=float, skiprows=1)
 col_names = np.genfromtxt(data_path , delimiter=',', names=True, dtype=float).dtype.names[1:31]
@@ -24,8 +24,9 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.4, random_s
 #Define the maximum depth
 DEPTH = 5
 
-class TestDecisionTreeClass:
+class TestRandomForestClass:
 
     def test_compare_accuracies(self):
         no_upper, lower_accuracies = compare_accuracies(accuracies_file_path, actual_accuracies_file_path)
-        assert no_upper, "key comparaison (actual vs new):\n{}".format("\n".join(lower_accuracies))
+        assert no_upper, "One or more accuracy is lower than the previous one. Key comparaison (actual vs new):\n{}".format("\n".join(lower_accuracies))
+

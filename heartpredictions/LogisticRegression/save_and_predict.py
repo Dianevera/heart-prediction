@@ -1,17 +1,16 @@
 import numpy as np
-import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-import torch
-from torch.utils.data import Dataset, DataLoader
 
-from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay, confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
+
 
 from .LogisticRegression import LogisticRegression
 from ..Commun.HeartDiseaseDataset import HeartDiseaseDataset
 from .Trainer import Trainer
+
 from .create_dataloaders import create_dataloaders
 
 def save_accuracies_pkl(pkl_filepath, accuracies):
