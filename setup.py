@@ -1,3 +1,3 @@
 from setuptools import setup, find_packages
 
-setup(name="heartpredictions", version='0.1.0', packages=find_packages(include=['DecisionTree', 'DecisionTree.*', 'LogisticRegression', 'LogisticRegression.*']))
+setup(name="heartpredictions", version='0.1.1', packages=find_packages(include=['Tree', 'Tree.*', 'LogisticRegression', 'LogisticRegression.*']))

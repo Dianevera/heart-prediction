@@ -1,7 +1,7 @@
 import numpy as np
-import pickle
 
 from sklearn.model_selection import train_test_split
+from tests.compare_accuracies import compare_accuracies
 
 #Load data
 data_path = "data/clean_data.csv"
@@ -27,28 +27,6 @@ DEPTH = 5
 class TestLogisticRegressionClass:
 
     def test_compare_accuracies(self):
-        accuracies_file = open(accuracies_file_path, "rb")
-        new_values = pickle.load(accuracies_file)
-        accuracies_file.close()
-
-        accuracies_file = open(actual_accuracies_file_path, "rb")
-        actual_values = pickle.load(accuracies_file)
-        accuracies_file.close()
-
-        keys = list(actual_values)
-
-        lower_accuracies = []
-        no_upper = True
-
-        print(actual_values, new_values)
-        for key in keys:
-            is_lower = actual_values[key] >= new_values[key]
-
-            if not is_lower:
-                no_upper = False
-
-            comparaison_str = str(actual_values[key]) + " >= " + str(new_values[key])
-            lower_accuracies.append(key + " : " + str(is_lower) + ' ' + comparaison_str)
-
+        no_upper, lower_accuracies = compare_accuracies(accuracies_file_path, actual_accuracies_file_path)
         assert no_upper, "One or more accuracy is lower than the previous one. Key comparaison (actual vs new):\n{}".format("\n".join(lower_accuracies))
 

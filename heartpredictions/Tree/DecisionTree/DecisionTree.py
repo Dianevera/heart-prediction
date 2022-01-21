@@ -2,12 +2,8 @@ from .Node import Node
 
 import numpy as np
 import os
-import seaborn as sns
 import ast
 import sys
-import matplotlib.pyplot as plt
-
-from sklearn.metrics import accuracy_score, confusion_matrix
 
 """
 DecisionTree Class
@@ -376,57 +372,7 @@ class DecisionTree:
         self.pretty_print_rec(node.left, tiret=tiret + "|---")
         self.pretty_print_rec(node.right, tiret=tiret + "|---")
 
-    def prediction_analyse(self, X_test, Y_test, confusion_matrix_display=True, proportion_informations=True):
-        """
-        Predict and display tools to analyse the result.
-
-        Parameters:
-            X_test (array) : Inputs array.
-            Y_test (array) : Labels array.
-            confusion_matrix_display (bool) : If True display the confusion matrix
-            proportion_informations (bool) : If True display proportion information (sensitivity, specificity, PPV, NPV)
-
-        Returns:
-            accuracy (float)
-        """
-        #Predict values for each individuals
-        Y_pred = self.predict(X_test)
-
-        #Compute accuracy score
-        accuracy = accuracy_score(Y_test.flatten(), Y_pred)
-        print("accuracy ==>", accuracy)
-
-        #Confusion matrix
-        if confusion_matrix_display:
-            cm = confusion_matrix(Y_test.flatten(), Y_pred)
-
-            group_names = ['True Neg','False Pos','False Neg','True Pos']
-            group_counts = ["{0:0.0f}".format(value) for value in cm.flatten()]
-            group_percentages = ["{0:.2%}".format(value) for value in cm.flatten()/np.sum(cm)]
-            labels = [f"{v1}\n{v2}\n{v3}" for v1, v2, v3 in
-                     zip(group_names,group_counts,group_percentages)]
-            labels = np.asarray(labels).reshape(2,2)
-            sns.heatmap(cm, annot=labels, fmt='', cmap='Blues')
-            plt.show()
-
-        #proportion informations
-        if proportion_informations:
-            TP = cm[1,1] # true positive 
-            TN = cm[0,0] # true negatives
-            FP = cm[0,1] # false positives
-            FN = cm[1,0] # false negatives
-
-            sensitivity = TP / (TP + FN)
-            specificity = TN / (TN + FP)
-
-            PPV = TP / (TP + FP) if (TP + FP) != 0 else 'no positives values'
-            NPV = TN / (TN + FN) if (TN + FN) != 0 else 'no negatives values'
-
-            print(f'sensitivity : {sensitivity}, specificity : {specificity}, PPV : {PPV}, NPV : {NPV}')
-
-        return accuracy
-
-    def save_tree(self, path):
+    def save(self, path, random_forest_call = False):
         tree_info = []
         tree_info.append(self.x_col_names)
         tree_info.append(self.min_participant)
@@ -436,7 +382,14 @@ class DecisionTree:
 
         tree_str = str(tree_info)
 
-        f = open(path, "w")
+        if os.path.isfile(path) and not random_forest_call:
+            os.remove(path)
+            
+        f = open(path, "a+")
+
+        if random_forest_call:
+            f.write("\n")
+            
         f.write(tree_str)
         f.close()
 
@@ -459,7 +412,7 @@ class DecisionTree:
 
         return node_info
 
-    def import_tree(self, path):
+    def load_from_file(self, path):
         if not os.path.isfile(path):
             print("File doesn't exist :", path, file=sys.stderr)
             return
@@ -474,17 +427,17 @@ class DecisionTree:
 
         tree_list = tree_list[3]
 
-        self.root = self.__build_tree_from_file(tree_list)
+        self.root = self.build_tree_from_file(tree_list)
 
 
-    def __build_tree_from_file(self, tree_list):
+    def build_tree_from_file(self, tree_list):
         if len(tree_list) == 0 :
             return None
 
         if len(tree_list) == 1:
             return Node(value=float(tree_list[0]))
 
-        return Node(self.__build_tree_from_file(tree_list[5]),
-                    self.__build_tree_from_file(tree_list[6]),
+        return Node(self.build_tree_from_file(tree_list[5]),
+                    self.build_tree_from_file(tree_list[6]),
                     float(tree_list[0]), float(tree_list[1]),
                     tree_list[2], int(tree_list[3]), tree_list[4])
