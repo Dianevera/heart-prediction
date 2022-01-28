@@ -14,7 +14,7 @@
 9. [Example of workflow](#Example-of-workflow)
 
 # Introduction
-Heart attack risk prediction
+Heart disease is one of the leading causes of death. Early detection is key to helping patients to mitigate the disease. For this project, we use synthetic clinical data made from the Farmingham study to train models to see which one works the best. This project was done in the context of our final semester AI project. The creators of this project are Ines Khemir, Diane Ngako and Jake Penney.
 
 # Installation
 * ## Requirements installation
@@ -39,7 +39,7 @@ python -m pytest -v tests/Test*.py
 Tests will fail as long as the weights giving a higher accuracy are not put in the best_weights folder
 
 # State of the art
-The state of the art can be found in the file : "TODO".
+The state of the art can be found in the file : https://www.dropbox.com/scl/fi/wt7suf37wg0n0s8wusnig/Study-of-posibilities.pptx?dl=0&rlkey=vni0fuk736trjp39ob8ebfqvz.
 
 # Report of project
 The project report can be found in the file : "TODO"
@@ -47,9 +47,11 @@ The project report can be found in the file : "TODO"
 # Test integration
 Thanks to the python application github's action we add a test integration action after each commit. 
   All test in the testsuite must be pass to merge a branch.
+  To test localy you can just launch pytest in the root folder.
   
 # About the data analysis
-#TODO 
+
+In the 
 
 # About the data cleaning
 #TODO 
