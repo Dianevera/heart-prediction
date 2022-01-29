@@ -19,7 +19,7 @@
 Heart disease is one of the leading causes of death. Early detection is key to helping patients to mitigate the disease. For this project, we use synthetic clinical data made from the Farmingham study to train models to see which one works the best. This project was done in the context of our final semester AI project. The creators of this project are Ines Khemir, Diane Ngako and Jake Penney.
 
 # Installation
-This project compatible with python 3.9
+This project is compatible with python 3.9
 * ## Requirements installation
 To install requirements:
 ```sh
@@ -84,4 +84,4 @@ python src/data_cleaning.py
 	In this package we have all our function that are unique to the MLP model. This package is located at : /heartprediction/LogisticRegression
 
 # Examples
-<a href="https://www.youtube.com/watch?v=lisCrmz3X3k" target="_top">Presentation video</a>
+<a href="https://youtu.be/n01OsuZs47E" target="_top">Presentation video</a>
