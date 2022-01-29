@@ -84,4 +84,4 @@ python src/data_cleaning.py
 	In this package we have all our function that are unique to the MLP model. This package is located at : /heartprediction/LogisticRegression
 
 # Examples
-<a href="www.dropbox.com/s/52id1lqvinhp5bt/Heart_Predictions.pdf?dl=0" target="_top">Presentation video</a>
+<a href="https://www.youtube.com/watch?v=lisCrmz3X3k" target="_top">Presentation video</a>
