@@ -41,15 +41,14 @@ python -m pytest -v tests/Test*.py
 Tests will fail as long as the weights giving a higher accuracy are not put in the best_weights folder
 
 # Data  
-The data is a synthetic verion of the Framingham datset. It is only for educational use only. To download it follow this link : https://www.dropbox.com/s/dyazza8xhfjjcx3/frmgham2.csv?dl=0
+The data is a synthetic verion of the Framingham datset. It is only for educational use only. To download it follow this link <a href="https://www.dropbox.com/s/dyazza8xhfjjcx3/frmgham2.csv?dl=0" target="_top">link</a>
 Download the data and put the csv file in data/.
 
 # State of the art
-The state of the art can be found at this link : https://www.dropbox.com/scl/fi/wt7suf37wg0n0s8wusnig/Study-of-posibilities.pptx?dl=0&rlkey=vni0fuk736trjp39ob8ebfqvz
+The state of the art can be found at this <a href="https://www.dropbox.com/scl/fi/wt7suf37wg0n0s8wusnig/Study-of-posibilities.pptx?dl=0&rlkey=vni0fuk736trjp39ob8ebfqvz" target="_top">link</a>
 
 # Paper of the project
-The project report can be found at this link (PDF) : https://www.dropbox.com/s/52id1lqvinhp5bt/Heart_Predictions.pdf?dl=0
-(Latex) : https://www.dropbox.com/s/4cerqlftwekyl2o/Heart%20Predictions.zip?dl=0
+The project report can be found in <a href="www.dropbox.com/s/52id1lqvinhp5bt/Heart_Predictions.pdf?dl=0" target="_top">PDF</a> and <a href="https://www.dropbox.com/s/4cerqlftwekyl2o/Heart%20Predictions.zip?dl=0" target="_top">LaTex</a>
 
 # Test integration
 Thanks to the python application github's action we add a test integration action after each commit. 
@@ -84,4 +83,4 @@ python src/data_cleaning.py
 	In this package we have all our function that are unique to the MLP model. This package is located at : /heartprediction/LogisticRegression
 
 # Examples
-#TODO screen cast
+<a href="www.dropbox.com/s/52id1lqvinhp5bt/Heart_Predictions.pdf?dl=0" target="_top">Presentation video</a>
