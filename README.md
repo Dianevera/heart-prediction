@@ -16,6 +16,3 @@ $ python -m pytest -v tests/Test*.py
 
 # Test integration
 * Thanks to the python application github's action we add a tests integrations before a pull request merge and at each commit push
-
-# About the heartpredictions module
-TODO
