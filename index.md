@@ -2,7 +2,7 @@
 
 <!--You can use the [editor on GitHub](https://github.com/Dianevera/heart-prediction/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.-->
 
-``` Table of Contents
+### Table of Contents
 1. [Introduction](#Introduction)
 2. [Installation](#Installation)
 3. [Tests](#Tests)
@@ -13,7 +13,7 @@
 8. [About the data cleaning](#About-the-data-cleaning)
 9. [More about the heartpredictions module](#More-about-the-heartpredictions-module)
 10. [Example of workflow](#Example-of-workflow)
-```
+
 
 # Introduction
 Heart disease is one of the leading causes of death. Early detection is key to helping patients to mitigate the disease. For this project, we use synthetic clinical data made from the Farmingham study to train models to see which one works the best. This project was done in the context of our final semester AI project. The creators of this project are Ines Khemir, Diane Ngako and Jake Penney.
